@@ -16,14 +16,14 @@ session_start();
         $body=$_POST['body'];
         $filename = $_FILES['cphoto']['name'];
 
-        if($flag==0){
+        
           if($conn){
 
             if(!empty($filename)){
               move_uploaded_file($_FILES['cphoto']['tmp_name'], 'images/'.$filename);	
             }
   
-            $sql="INSERT INTO candidate VALUES ('$cid','$cname','$filename','$party','$const','$body')";
+            $sql="INSERT INTO candidate VALUES ('$cid','$cname','$filename','$party','$const','$body',0)";
             $res=mysqli_query($conn,$sql);
 
             mysqli_close($conn);
@@ -31,7 +31,7 @@ session_start();
             header('Location:candidates.php');
 
           }
-        }
+        
         
     }
 
