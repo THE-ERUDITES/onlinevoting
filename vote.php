@@ -16,7 +16,7 @@ session_start();
 
         //value of radio button access
         $radioVal_cid = $_POST['VoteRadio'];
-        echo $radioVal_cid;
+        //echo $radioVal_cid;
         
         //voting allowed donly once
         $sql1= "UPDATE voter SET flag=1 WHERE voter_id='$voter_id' ";
@@ -93,7 +93,7 @@ session_start();
 
   </head>
   <body>
-  <!--<div class="container">
+  <div class="container">
   	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse
     " role="navigation">
       <div class="container">
@@ -106,7 +106,7 @@ session_start();
           <a href="#" class="navbar-brand headerFont text-lg"><strong>eVoting</strong></a>
         </div>
       </div> 
-    </nav>  -->
+    </nav>  
   <!-- end of container -->
     
     <!--candidate list -->
