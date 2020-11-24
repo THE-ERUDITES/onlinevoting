@@ -150,7 +150,7 @@ session_start();
                         <div class="img-square-wrapper">
                             <img class="" src="<?php echo ('images/'.$row["cphoto"]); ?>" alt="Card image cap" height="220px" width="230px">
                         </div>
-                        <div class="card-body col-md-9 offset-md-2" style="text-align:left"><br>
+                        <div class="card-body col-md-9 offset-md-2" style="text-align:left">
                             <h4 class="card-title headerFont"><b><?php echo $row["cname"]; ?></b></h4><br>
                             <p class="card-text normalFont"><u>Candidate ID</u> :- <?php echo $row["cid"]; ?></p>
                             <p class="card-text normalFont"><u>Party</u> :- <?php echo $row["party"]; ?></p>
