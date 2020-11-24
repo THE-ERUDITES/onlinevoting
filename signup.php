@@ -28,7 +28,8 @@ flag => flag -->
 		$password=$_POST['password'];
 		$cpassword=$_POST['cpassword'];
         $flag = false;
-
+        $active = 0;
+        $count=0;
 		$valid=true;
 		// if((strlen($name)!=4) or ($id[0]!='U') or !ctype_digit($id[1]) or !ctype_digit($id[2]) or !ctype_digit($id[3])){
 		// 		$errors['name']='*InvalnameFormat, Format is UXXX, X is 0-9';
@@ -82,25 +83,96 @@ flag => flag -->
 			$errors['cpassword']='*Passwords not matching';
 			$valid=false;
 		}
+        #################################################################################################################################
+        // Return Success - Valid Email
+        if($valid)
+        {
+
+        $msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
+        //echo '<h6>'.$msg.'<h6>';
+        $hash = md5( rand(0,1000) ); // Generate random 32 character hash and assign it to a local variable.
+        // Example output: f4552671f8909587cf485ea990207f3b
+        $sql="INSERT INTO voter VALUES('$name','$email','$age','$uname','$voter_id','$password','$flag','$count','$hash','$active')";
+        $res=mysqli_query($conn,$sql);  
+        echo 'hi';
+        $message = '
         
-		if($valid){
-			if($conn){
-                $sql="INSERT INTO voter VALUES('$name','$email','$age','$uname','$voter_id','$password','$flag')";
-                $res=mysqli_query($conn,$sql);
-				if($res) {
-					$_SESSION['name'] = $name;
-					$_SESSION['age']=$age;
-					$_SESSION['email']=$email;
-					$_SESSION['uname']=$uname;
-					$_SESSION['voter_id']=$voter_id;
-                    $_SESSION['password']=$password;
-                    $_SESSION['flag']=$flag;
-					//setcookie("name",$name, time() + 60*60*24,'/');
-					header("location: user_profile.php");
-				}
-			}
-			mysqli_close($conn);
-		}
+        Thanks for signing up!
+        Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+        
+        ------------------------
+        Username: '.$name.'
+        Password: '.$password.'
+        ------------------------
+        
+        Please click this link to activate your account:
+        http://localhost/onlinevoting/verify.php?email='.$email.'&hash='.$hash.'
+        
+        '; // Our message above including the link
+        require_once('../PHPMailer/PHPMailer-5.2-stable/PHPMailerAutoload.php');
+        $from='erudite.onlinevoting@gmail.com';
+        $to=$email;
+        $password='eruditeproject';
+        $sub='Signup | Verification';
+        $body=$message;
+        $mail = new PHPMailer(); 
+        $mail->isSMTP();
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = '465';
+        $mail->isHTML();
+        $mail->Username = $from;
+        $mail->Password = $password;
+        $mail->Subject = $sub;
+        $mail->Body = $body;
+        $mail->AddAddress($to);
+        if($mail->Send()){
+        echo "<h2>Email sent successfully!</h2>";
+        echo "<script>alert('Subject: $sub \\nBody: $body');</script>";
+        }
+        else echo "<h2>There was an error, try again!</h2>";
+          
+        //$to      = $email; // Send email to our user
+        //$subject = 'Signup | Verification'; // Give the email a subject 
+        // $message = '
+        
+        // Thanks for signing up!
+        // Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+        
+        // ------------------------
+        // Username: '.$name.'
+        // Password: '.$password.'
+        // ------------------------
+        
+        // Please click this link to activate your account:
+        // http://localhost/onlinevoting/verify.php?email='.$email.'&hash='.$hash.'
+        
+        // '; // Our message above including the link
+                            
+       // $headers = 'From:noreply@yourwebsite.com' . "\r\n"; // Set from headers
+        //mail($to, $subject, $message, $headers); // Send our email
+        mysqli_close($conn);
+        }
+        ##################################################################################################################################
+		// if($valid){
+		// 	if($conn){
+        //         $sql="INSERT INTO voter VALUES('$name','$email','$age','$uname','$voter_id','$password','$flag')";
+        //         $res=mysqli_query($conn,$sql);
+		// 		if($res) {
+		// 			$_SESSION['name'] = $name;
+		// 			$_SESSION['age']=$age;
+		// 			$_SESSION['email']=$email;
+		// 			$_SESSION['uname']=$uname;
+		// 			$_SESSION['voter_id']=$voter_id;
+        //             $_SESSION['password']=$password;
+        //             $_SESSION['flag']=$flag;
+		// 			//setcookie("name",$name, time() + 60*60*24,'/');
+		// 			header("location: user_profile.php");
+		// 		}
+		// 	}
+		// 	mysqli_close($conn);
+		// }
 	}
 ?>
 
@@ -141,11 +213,11 @@ flag => flag -->
 </head>
 <body>
 <div class="container">
-  	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+  	<!-- <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
         <div class="navbar-header">
           <a href="index.html" class="navbar-brand headerFont text-lg"><strong>eVoting</strong></a>
       </div>
-    </nav>
+    </nav> -->
 
     
     <div class="container" style="padding-top:150px;">
