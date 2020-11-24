@@ -25,11 +25,11 @@
 			$res=mysqli_query($conn,$sql);
 			if(mysqli_num_rows($res)>0){
 				$voters=mysqli_fetch_all($res,MYSQLI_ASSOC);
-				$_SESSION['name'] = $name;
-				// $_SESSION['fname']=$customers[0]['fname'];
-				// $_SESSION['lname']=$customers[0]['lname'];
-				// $_SESSION['email']=$customers[0]['email'];
-				// $_SESSION['mob']=$customers[0]['mob'];
+        $_SESSION['name'] = $voters[0]['name'];
+        $_SESSION['email'] = $voters[0]['email'];
+        $_SESSION['age'] = $voters[0]['age'];
+        $_SESSION['voter_id'] = $voters[0]['voter_id'];
+        $_SESSION['uname'] = $uname;
 				$_SESSION['password']=$password;
 				//setcookie("name",$customers[0]['fname'], time() + 60*60*24,'/');
 				header("location: user_profile.php");
@@ -40,6 +40,7 @@
 		}
 	}
 
+  
 ?>
 
 <!DOCTYPE html>

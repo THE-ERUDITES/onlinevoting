@@ -1,5 +1,5 @@
 <?php
- session_start();
+session_start();
     $db_host = "localhost";
     $db_user = "root";
     $db_password = "";
@@ -11,9 +11,12 @@
 
     if(isset($_POST['submitVote']))
     {
-        $party = $_POST('Vparty');
-        $sql= "UPDATE candidate SET count+=1 WHERE party='$party' ";
+        echo "hello thanks for voting";
+        $party = $_POST["Vparty"];
+        
+        $sql= "UPDATE candidate SET count=count+1 WHERE party='$party' ";
         if (mysqli_query($conn, $sql)) {
+            
             header("location: saveVote.php");
         }
         else
@@ -25,56 +28,124 @@
     $sql= "SELECT * FROM candidate ";
     $result= mysqli_query($conn, $sql);
  ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Voting page</title>
+    <title>Control Panel</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+
     <style>
         table,th,td{
-            text-align: left;
-            padding: 5px;
+            text-align:center;
+            padding: 10px;
         }
+
+      .headerFont{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 24px;
+      }
+
+      .subFont{
+        font-family: 'Raleway', sans-serif;
+        font-size: 14px;
+        
+      }
+      .specialHead{
+        font-family: 'Oswald', sans-serif;
+      }
+
+      .normalFont{
+        font-family: 'Roboto Condensed', sans-serif;
+      }
+      .icon-input-btn{
+        display: inline-block;
+        position: relative;
+      }
+      .icon-input-btn input[type="submit"]{
+          padding-left: 2em;
+      }
+      .icon-input-btn .glyphicon{
+          display: inline-block;
+          position: absolute;
+          left: 0.3em;
+          top: 24%;
+          color:white;
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="row row-content">
-            <div class= "col-12">
-               <h3>Cast your vote wisely!</h3>
-            </div>
+
+  </head>
+  <body>
+  <div class="container">
+  	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse
+    " role="navigation">
+      <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand headerFont text-lg"><strong>eVoting</strong></a>
         </div>
-        <div class = "row row-content">
-               <form><table style = "width: 50%;border-collapse: collapse; border=1px" >
-               <tr>
-                 <th>Party</th>
-                 <th>Name</th>
-                 <th>Photo</th>
-                </tr>
-               <?php while($row = mysqli_fetch_assoc($result)) { ?>
-               <tr>
-               <td>
-               <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Vparty" id='<?php $row["party"] ?>' value="option1">
-                  <label class="form-check-label" for='<?php $row["party"] ?>' >Bhartiya Janta Party</label>
-                </div></td>
-                <td><?php echo $row["cname"]; ?></td>
-                <td><?php echo $row["cphoto"]; ?></td>
-                </tr>
-                <?php } ?>
-                </table>
-                <div class="form-group-row">
-                <input type="submit" class="btn btn-primary" name="submitVote" value="SUBMIT VOTE">
-                </div>
-                </form>
-        </div>
-    </div>  
-</body> 
-</html>      
+      </div> 
+    </nav>  
+  <!-- end of container -->
     
+    <!--candidate list -->
+    <center>
+    <div class="container" style="padding:100px 10px 20px 10px ;">
+      <div class="row">
+        <div class="col-sm-12" style="border:2px solid gray;">
+        <center>
+          <div class="page-header">
+            <h2 class="specialHead" ></span>CAST YOUR VOTE WISELY!</h2><br>
+            
+            <!--table-->
+            <form method="POST" action="vote.php">
+            <table style = "width:75%;border-collapse: collapse;" border="1px">
+                <tr>
+                <center>
+                <th>Political Party</th>
+                <th>Candidate Name</th>
+                <th>PHOTO</th>
+                <center>
+                </tr>
+                <?php while($row = mysqli_fetch_assoc($result)) { ?>
+                    <tr>
+                    <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Vparty" id='<?php $row["party"] ?>' value="option1">
+                        <label class="form-check-label" for='<?php $row["party"] ?>' ><?php echo $row["party"]?></label>
+                        </div>
+                    </td>
+                     <td><?php echo $row["cname"]; ?></td>
+                    <td><img src="<?php echo ('images/'.$row["cphoto"]); ?>" alt="img not found!" width="60px" height="60px" >
+                    </tr>
+                <?php } ?>
+            </table>
+            <br>
+            <div class="form-group-row">
+        <input type="submit" class="btn btn-primary" name="submitVote" value="SUBMIT VOTE">
+        </div>
+        </form>
+
+          </div>
+        </center>
+      </div>
+    </div>
+  </div>
+  </center>
+
+    
+    
+

@@ -38,7 +38,7 @@
     <div class="row">
     <br><br>
     <form action="user_profile.php" method="POST">
-    <input type="submit" id="#btn" name="logout" value="LOGOUT">
+    <input type="submit" id="#btn" name="logout" value="LOGOUT" class="btn btn-success">
     </form>
     </div>
   </div>
