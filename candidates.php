@@ -6,12 +6,23 @@ session_start();
     $db_password = '';
     $db_name = 'onlinevoting';
     $conn = mysqli_connect($db_host,$db_username,$db_password,$db_name);
+
+
     if(!$conn){
         die("Connection Failed.");
     }
     else{
         echo "Connected Successfully!<br><br>";
     }
+
+    //delete
+    if(isset($_POST['delete'])){
+
+      $delid =$_POST["cid"]; 
+
+      $sql="Delete from candidate where candidate.cid=$delid";
+    }
+
     $sql = "Select * from candidate";
     $result = mysqli_query($conn,$sql);
 ?>
@@ -86,9 +97,18 @@ session_start();
     </nav>  
   <!-- end of container -->
 
+ <!--tools-->
+ <div class="container" style="padding:50px 30px 5px 30px;">
+      <div class="row">
+        <div class="col-sm-12">
+            <button type="button" name="insert" class="btn btn-info"><a href="cinsert.php"><span class="glyphicon glyphicon-plus"></span> INSERT NEW CANDIDATE</button>
+          </div>
+        </div>
+      </div>
+    
     <!--candidate list -->
     <center>
-    <div class="container" style="padding:100px 10px 20px 10px ;">
+    <div class="container" style="padding:15px 10px 20px 10px ;">
       <div class="row">
         <div class="col-sm-12" style="border:2px solid gray;">
         <center>
@@ -105,16 +125,30 @@ session_start();
                 <th>Political Party</th>
                 <th>Constituency</th>
                 <th>Description</th>
+                <th>Update</th>
+                <th>Delete</th>
                 </center>
                 </tr>
                 <?php while($row = mysqli_fetch_assoc($result)) { ?>
                     <tr>
                     <td><?php echo $row["cid"]; ?></td>
                     <td><?php echo $row["cname"]; ?></td>
-                    <td><img src="<?php echo ('images/'.$row["cphoto"]); ?>" alt="img not found!" width="60px" height="60px" ></td>
+                    <td><img src="<?php echo ('images/'.$row["cphoto"]); ?>" alt="img not found!" width="60px" height="60px" >
+                        <a href='cupdatephoto.php?cid=<?php echo $row["cid"]; ?>' class='pull-right photo'><span class="glyphicon glyphicon-edit"></span></a></td>
                     <td><?php echo $row["party"]; ?></td>
                     <td><?php echo $row["const"]; ?></td>
                     <td><?php echo $row["body"]; ?></td>
+                    
+                    <td>
+                    <button type="button" name="update" class="btn btn-info"><a href="cupdatedata.php?cid=<?php echo $row["cid"]; ?>">update</button>
+                    </td>
+
+                    <td>
+                    <form method="POST" action="candidates.php">
+                          <input type="hidden" name="cid" value=<?php echo $row["cid"] ?> >
+                          <input type="submit" value="Delete" name="delete" >
+                    </form>
+                    </td>
                     </tr>
                 <?php } ?>
             </table>
@@ -126,24 +160,6 @@ session_start();
   </div>
   </center>
 
-    <!--tools-->
-    <div class="container" style="padding:20px 30px 30px 30px;">
-      <div class="row">
-        <div class="col-sm-12">
-          <center>
-          <div class="page-header">
-            <!--insert button--> 
-            <button type="button" name="insert" class="btn btn-info"><a href="cinsert.php"><span class="glyphicon glyphicon-plus"></span> INSERT</button>
-            <!--delete button--> 
-            <button type="button" name="delete" class="btn btn-info"><a href="cdelete.php"><span class="glyphicon glyphicon-minus"></span> DELETE</button>
-            <!--update button--> 
-            <button type="button" name="update" class="btn btn-info"><a href="cupdate.php"><span class="glyphicon glyphicon-pencil"></span> UPDATE</button>
-          </div>
-          </center>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    
     
 
