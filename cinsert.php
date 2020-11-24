@@ -16,17 +16,23 @@ session_start();
         $body=$_POST['body'];
         $filename = $_FILES['cphoto']['name'];
 
-        if(!empty($filename)){
-          move_uploaded_file($_FILES['cphoto']['tmp_name'], 'images/'.$filename);	
+        if($flag==0){
+          if($conn){
+
+            if(!empty($filename)){
+              move_uploaded_file($_FILES['cphoto']['tmp_name'], 'images/'.$filename);	
+            }
+  
+            $sql="INSERT INTO candidate VALUES ('$cid','$cname','$filename','$party','$const','$body')";
+            $res=mysqli_query($conn,$sql);
+
+            mysqli_close($conn);
+           
+            header('Location:candidates.php');
+
+          }
         }
-
-        //check if candidate id is unique or not..and generate error
-
-        $sql="INSERT INTO candidate VALUES ('$cid','$cname','$filename','$party','$const','$body')";
-        $res=mysqli_query($conn,$sql);
-        mysqli_close($conn);
-       
-        header('Location:candidates.php');
+        
     }
 
     if(!$conn){
@@ -122,6 +128,10 @@ session_start();
             
             <form action="cinsert.php" method="POST" enctype="multipart/form-data">
       			<div class="form-group">
+            
+            <!--error message if any-->
+            <h5 style="color: red;"><?php echo $error; ?></h5><br>
+
                     <label>Candidate ID *</label><br>
       				<input type="text" name="cid" placeholder="Enter Candidate ID eg.456" pattern="[0-9]{3}" class="form-control" required><br>
                       
@@ -138,8 +148,8 @@ session_start();
                     <input type="text" name="body" placeholder="Enter few lines of Description" class="form-control"><br>
                       
                     <!--upload photo-->
-                    <label>Select image to upload:</label><br> <input type="file" name="cphoto" id="fileToUpload">
-                      <h5 style="color: red;"><?php echo $error; ?></h5><br>
+                    <label>Select image to upload:</label><br> <input type="file" name="cphoto" id="fileToUpload"><br><br>
+                      
 
       				<button type="submit" name="insert" class="btn btn-block span btn-primary "><span class="glyphicon glyphicon-plus"></span>  INSERT</button>
 
