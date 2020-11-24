@@ -25,13 +25,13 @@
 			$res=mysqli_query($conn,$sql);
 			if(mysqli_num_rows($res)>0){
 				$voters=mysqli_fetch_all($res,MYSQLI_ASSOC);
-				$_SESSION['fname'] = $fname;
+				$_SESSION['name'] = $name;
 				// $_SESSION['fname']=$customers[0]['fname'];
 				// $_SESSION['lname']=$customers[0]['lname'];
 				// $_SESSION['email']=$customers[0]['email'];
 				// $_SESSION['mob']=$customers[0]['mob'];
 				$_SESSION['password']=$password;
-				setcookie("name",$customers[0]['fname'], time() + 60*60*24,'/');
+				//setcookie("name",$customers[0]['fname'], time() + 60*60*24,'/');
 				header("location: index.html");
 			}
 			else{

@@ -39,21 +39,33 @@ flag => flag -->
 		if(mysqli_num_rows($res)>0){
 			$errors['uname']='*name already taken by another user';
 			$valid=false;
+        }
+        $sql="SELECT * FROM govt_db WHERE voter_id='$voter_id'";
+		$res=mysqli_query($conn,$sql);
+		if(mysqli_num_rows($res)==0){
+			$errors['voter_id']='*voter id is not valid';
+			$valid=false;
 		}
 
 		
 			for($i=0;$i<strlen($name);$i++){
 				if(!ctype_alpha($name[$i])){
-					$errors['name']='*Full Name can contain only alphabets';
+                    if(!ctype_space($name[$i])){
+                    $errors['name']='*Full Name can contain only alphabets';
 					$valid=false;
 					break;
+                    }
 				}
 			}
-		
+            if($age <= 17)
+            {
+                $errors['age']='*age cannot be less than 18';
+                $valid = false;
+            }
 
 			for($i=0;$i<strlen($uname);$i++) {
 				if(!ctype_alpha($uname[$i])){
-					$errors['uname']='*Username can contain only alphabets';
+					$errors['uname']='*Username can contain only alphabets and no blank spaces';
 					$valid=false;
 					break;
 				}
@@ -121,7 +133,7 @@ flag => flag -->
 
 		<label>Voter ID:</label>
 		<input type="int" name="voter_id" value="<?php echo isset($_POST["voter_id"]) ? $_POST["voter_id"] : ''; ?>" pattern="[0-9]{7}" required><br><br>
-
+        <div style="color: red;"><?php echo $errors['voter_id']; ?></div><br><br>
 		<label>Password:</label>
 		<input type="password" name="password" placeholder="8-50 characters" required>
 		<div style="color: red;"><?php echo $errors['password']; ?></div><br><br>
