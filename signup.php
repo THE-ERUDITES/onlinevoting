@@ -177,8 +177,8 @@ flag => flag -->
                         <br><br>
 
                         <label>Voter ID:</label>
-                        <input type="int" name="voter_id" class="form-control" value="<?php echo isset($_POST["voter_id"]) ? $_POST["voter_id"] : ''; ?>" pattern="[0-9]{7}" required><br><br>
-                        <div style="color: red;"><?php echo $errors['voter_id']; ?></div>   
+                        <input type="int" name="voter_id" class="form-control" value="<?php echo isset($_POST["voter_id"]) ? $_POST["voter_id"] : ''; ?>" pattern="[0-9]{7}" required>
+                        <div style="color: red;"><?php echo $errors['voter_id']; ?><br><br></div>   
                         <label>Password:</label>
                         <input type="password" name="password" class="form-control" placeholder="8-50 characters" required>
                         <div style="color: red;"><?php echo $errors['password']; ?></div><br><br>

@@ -45,27 +45,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+
+    <style>
+      .headerFont{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 24px;
+      }
+
+      .subFont{
+        font-family: 'Raleway', sans-serif;
+        font-size: 14px;
+        
+      }
+      
+      .specialHead{
+        font-family: 'Oswald', sans-serif;
+      }
+
+      .normalFont{
+        font-family: 'Roboto Condensed', sans-serif;
+      }
+    </style>
 </head>
 <body>
+<div class="container">
+  	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="navbar-header">
+          <a href="index.html" class="navbar-brand headerFont text-lg"><strong>eVoting</strong></a>
+      </div>
+    </nav>
 
-	<h1><u>Login</u></h1><br>
+    
+    <div class="container" style="padding-top:150px;">
+    	<div class="row">
+    		<div class="col-sm-4"></div>
+    		<div class="col-sm-4" style="border:2px solid gray;padding:50px;">
+    			
+    			<div class="page-header">
+    				<h2 class="specialHead">Log In</h2>
+                </div>
+                
+          <form action="login.php" method="POST">
+      			<div class="form-group">
+                      
+                    <label>Username:</label>
+                    <input type="text" name="uname" class="form-control" required><br><br>
 
-	<form action="login.php" method="post">
-		
-		<label>Username:</label>
-		<input type="text" name="uname"><br><br>
+                    <label>Password:</label>
+                    <input type="password" name="password" class="form-control" required><br><br>
 
-		<label>Password:</label>
-		<input type="password" name="password"><br><br>
+                    <h5 style="color: red;"><?php echo $error; ?></h5>
 
-		<h5 style="color: red;"><?php echo $error; ?></h5><br><br>
+      				<button type="submit" name="submit" class="btn btn-block span btn-primary "><span class="glyphicon glyphicon-user"></span> Log In</button>
+                    <br><a href="signup.php" class="form-control">New User? SignUp</a>
+      			</div>
 
-		<input type="submit" name="submit" value="Login">
+          </form>
+          <br>
 
-	</form>
+    		</div>
+    		<div class="col-sm-4"></div>
+    	</div>
+    </div>
 
-	<h3><a href="signup.php">New User?SignUp</a></h3>
+    </div>
 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
