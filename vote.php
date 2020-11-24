@@ -11,17 +11,25 @@ session_start();
 
     if(isset($_POST['submitVote']))
     {
-        echo "hello thanks for voting";
-        $party = $_POST["Vparty"];
+      echo "<script>alert('thanks!');</script>";
+        $voter_id= $_SESSION["voter_id"];
+
+        //value of radio button access
+        $radioVal_cid = $_POST['VoteRadio'];
+        echo $radioVal_cid;
         
-        $sql= "UPDATE candidate SET count=count+1 WHERE party='$party' ";
-        if (mysqli_query($conn, $sql)) {
+        //voting allowed donly once
+        $sql1= "UPDATE voter SET flag=1 WHERE voter_id='$voter_id' ";
+
+        //increase count
+        $sql2= "UPDATE candidate SET count_vote=count_vote+1 WHERE cid='$radioVal_cid' ";
+        if (mysqli_query($conn, $sql1) && mysqli_query($conn,$sql2)) {
             
             header("location: saveVote.php");
         }
         else
         {
-            echo "Error: " . $sql . ":-" . mysqli_error($conn);
+            echo "Error: " . $sql2 . ":-" . mysqli_error($conn);
         }
     }
 
@@ -85,7 +93,7 @@ session_start();
 
   </head>
   <body>
-  <div class="container">
+  <!--<div class="container">
   	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse
     " role="navigation">
       <div class="container">
@@ -98,7 +106,7 @@ session_start();
           <a href="#" class="navbar-brand headerFont text-lg"><strong>eVoting</strong></a>
         </div>
       </div> 
-    </nav>  
+    </nav>  -->
   <!-- end of container -->
     
     <!--candidate list -->
@@ -108,7 +116,7 @@ session_start();
         <div class="col-sm-12" style="border:2px solid gray;">
         <center>
           <div class="page-header">
-            <h2 class="specialHead" ></span>CAST YOUR VOTE WISELY!</h2><br>
+            <h2 class="specialHead" ></span>CAST YOUR VOTE WISELY, <?php echo $_SESSION["name"];?>!</h2><br>
             
             <!--table-->
             <form method="POST" action="vote.php">
@@ -124,7 +132,7 @@ session_start();
                     <tr>
                     <td>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Vparty" id='<?php $row["party"] ?>' value="option1">
+                        <input class="form-check-input" type="radio" name="VoteRadio" id="<?php echo $row["party"] ?>"  value="<?php echo $row["cid"]?>">
                         <label class="form-check-label" for='<?php $row["party"] ?>' ><?php echo $row["party"]?></label>
                         </div>
                     </td>
