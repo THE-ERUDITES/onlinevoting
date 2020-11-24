@@ -96,7 +96,7 @@ flag => flag -->
                     $_SESSION['password']=$password;
                     $_SESSION['flag']=$flag;
 					//setcookie("name",$name, time() + 60*60*24,'/');
-					header("location: index.html");
+					header("location: user_profile.php");
 				}
 			}
 			mysqli_close($conn);

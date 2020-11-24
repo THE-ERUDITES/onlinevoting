@@ -32,7 +32,7 @@
 				// $_SESSION['mob']=$customers[0]['mob'];
 				$_SESSION['password']=$password;
 				//setcookie("name",$customers[0]['fname'], time() + 60*60*24,'/');
-				header("location: index.html");
+				header("location: user_profile.php");
 			}
 			else{
 				$error='*Incorrect id/password';
