@@ -76,9 +76,9 @@ session_start();
           <center>
           <div class="page-header">
             <img src="images/GitHub.png" alt="admin" width="250px" height="250px"><br><br>
-            <h2 class="specialHead" ><span class="glyphicon glyphicon-user"></span> INFORMATION about the ADMIN who logged in -</h2><br><br><br>
+            <h2 class="specialHead" >Welcome to Online Voting System ,  <?php echo $_SESSION["fname"] . "!<br>";?></h2><br><br><br>
+            <span class="glyphicon glyphicon-user"></span>
             <p class="normalFont"><?php  echo "Admin ID : " . $_SESSION["aid"] . "<br>";
-                                        echo "Full Name : " . $_SESSION["fname"] . ".<br>";
                                         echo "User Name : " . $_SESSION["aname"] . ""; ?></p>
           </center>
           </div>

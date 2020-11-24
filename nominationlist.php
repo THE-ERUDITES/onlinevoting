@@ -1,3 +1,24 @@
+<?php
+session_start();
+
+    $db_host = 'localhost';
+    $db_username = 'root';
+    $db_password = '';
+    $db_name = 'onlinevoting';
+    $conn = mysqli_connect($db_host,$db_username,$db_password,$db_name);
+
+
+    if(!$conn){
+        die("Connection Failed.");
+    }
+    else{
+        echo "Connected Successfully!<br><br>";
+    }
+
+    $sql = "Select * from candidate";
+    $result = mysqli_query($conn,$sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +30,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    
     <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
@@ -20,6 +41,7 @@
     body{
       margin:0px;
       padding:0px;
+      
     }
       .headerFont{
         font-family: 'Ubuntu', sans-serif;
@@ -67,6 +89,16 @@
           color: #FFFFFF;
           text-decoration: none;
       }
+      .card-horizontal {
+        display: flex;
+        flex: 1 1 auto;
+    }
+    .div-cards{
+      
+      /* box-shadow */
+      box-shadow: rgba(0,0,0,0.7) 0 0 10px;
+      border-collapse: collapse;
+    }
     </style>
 
 
@@ -92,46 +124,48 @@
           <span class="normalFont"><a href="admin.php" class="btn btn-success navbar-right navbar-btn"><strong>Admin Panel</strong></a></span>
         </div>
 
-      </div> <!-- end of container -->
-    </nav>
-    </div>
-
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="jumbotron text-center text-block" style="padding-top:170px;">
-              <img src="images/Vote.png" alt="">
-                  <h1 class="specialHead">Online Voting System</h1>
-                  <p class="normalFont">Safe . Reliable . Secure . Fast </p>
-
-                  <a href="login.php" class="btn btn-primary btn-md specialHead"> <span class="glyphicon glyphicon-tag"></span> Cast Your Vote</a>
-                  <br><br>
-                  <a href="nominationlist.php" class="btn btn-primary btn-md specialHead"> <span class="glyphicon glyphicon-user"></span> Check out Candidates</a>
-            </div>
-          </div>
-        </div>
       </div>
+    </nav>
+    </div> <!-- end of container -->
 
-      
-      
-      
-      <footer>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4 text-center">
-             <h3 class="specialHead">Riya Singhal</h3>
+      <!--nomination list-->
+      <?php /*while($row = mysqli_fetch_assoc($result)) { ?>
+                    
+                    <?php echo $row["cid"]; ?></td>
+                    <td><?php echo $row["cname"]; ?></td>
+                    <td><img src="<?php echo ('images/'.$row["cphoto"]); ?>" alt="img not found!" width="60px" height="60px" >
+                        <a href='cupdatephoto.php?cid=<?php echo $row["cid"]; ?>' class='pull-right photo'><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td><?php echo $row["party"]; ?></td>
+                    <td><?php echo $row["const"]; ?></td>
+                    <td><?php echo $row["body"]; ?></td>
+                
+      <?php }*/ ?>
+    <center>
+    <?php while($row = mysqli_fetch_assoc($result)) { ?>
+        <div class="container-fluid" style="padding:30px 340px 20px 340px" >
+        <div class="row">
+            <div class="col-12 mt-3">
+                <div class="card bg-primary text-white div-cards">
+                    <div class="card-horizontal">
+                        <div class="img-square-wrapper">
+                            <img class="" src="<?php echo ('images/'.$row["cphoto"]); ?>" alt="Card image cap" height="220px" width="230px">
+                        </div>
+                        <div class="card-body col-md-9 offset-md-2" style="text-align:left"><br>
+                            <h4 class="card-title headerFont"><b><?php echo $row["cname"]; ?></b></h4><br>
+                            <p class="card-text normalFont"><u>Candidate ID</u> :- <?php echo $row["cid"]; ?></p>
+                            <p class="card-text normalFont"><u>Party</u> :- <?php echo $row["party"]; ?></p>
+                            <p class="card-text normalFont"><u>Constituency</u> :- <?php echo $row["const"]; ?></p>
+                            <p class="card-text normalFont"><u>Description</u> :- <?php echo $row["body"]; ?></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-4 text-center">
-                <h3 class="specialHead">Shruti Bhatt</h3>
-               </div>
-            <div class="col-sm-4 text-center">
-                <h3 class="specialHead">Yamini Kabra</h3>
-            </div>
-          </div>
         </div>
-      </footer>
-    
-    
+    </div>
+  </center>
+  <?php } ?>
+      
+   
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
