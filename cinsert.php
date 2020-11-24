@@ -16,15 +16,6 @@ session_start();
         $body=$_POST['body'];
         $filename = $_FILES['cphoto']['name'];
 
-        //candidate id should be unique, if not ,generate  error
-        $flag=0;
-        $sql="SELECT COUNT(*) from candidate WHERE cid='$cid'";
-        $noofrows=mysqli_query($conn,$sql);
-        if($noofrows>0){
-            $flag=1;
-            $error="There already exist a candidate with this ID<br>PLEASE Enter a unique candidate ID!";
-        }
-
         if($flag==0){
           if($conn){
 
@@ -34,9 +25,11 @@ session_start();
   
             $sql="INSERT INTO candidate VALUES ('$cid','$cname','$filename','$party','$const','$body')";
             $res=mysqli_query($conn,$sql);
+
             mysqli_close($conn);
            
             header('Location:candidates.php');
+
           }
         }
         

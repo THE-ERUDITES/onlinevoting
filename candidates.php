@@ -21,6 +21,11 @@ session_start();
       $delid =$_POST["cid"]; 
 
       $sql="Delete from candidate where candidate.cid=$delid";
+      if(mysqli_query($conn,$sql)){
+        echo '<script>alert("Row Deleted Successfully!")</script>';
+       }
+       else echo "<br>There was an error!<br>";
+       
     }
 
     $sql = "Select * from candidate";
@@ -64,6 +69,20 @@ session_start();
 
       .normalFont{
         font-family: 'Roboto Condensed', sans-serif;
+      }
+      .icon-input-btn{
+        display: inline-block;
+        position: relative;
+      }
+      .icon-input-btn input[type="submit"]{
+          padding-left: 2em;
+      }
+      .icon-input-btn .glyphicon{
+          display: inline-block;
+          position: absolute;
+          left: 0.3em;
+          top: 24%;
+          color:white;
       }
     </style>
 
@@ -127,7 +146,7 @@ session_start();
                 <th>Description</th>
                 <th>Update</th>
                 <th>Delete</th>
-                </center>
+                <center>
                 </tr>
                 <?php while($row = mysqli_fetch_assoc($result)) { ?>
                     <tr>
@@ -140,13 +159,17 @@ session_start();
                     <td><?php echo $row["body"]; ?></td>
                     
                     <td>
-                    <button type="button" name="update" class="btn btn-info"><a href="cupdatedata.php?cid=<?php echo $row["cid"]; ?>">update</button>
+                    <a href="cupdatedata.php?cid=<?php echo $row["cid"];?>" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> UPDATE</a>
                     </td>
 
                     <td>
-                    <form method="POST" action="candidates.php">
-                          <input type="hidden" name="cid" value=<?php echo $row["cid"] ?> >
-                          <input type="submit" value="Delete" name="delete" >
+                    <form method="POST" action="candidates.php"><br>
+                          <span class="icon-input-btn">
+                            <i class="glyphicon glyphicon-trash"></i> 
+                            <input type="hidden" name="cid" value=<?php echo $row["cid"] ?> >
+                            <input type="submit" value="DELETE" name="delete" class="btn btn-danger"> 
+                          </span>
+                                               
                     </form>
                     </td>
                     </tr>
