@@ -29,7 +29,6 @@ flag => flag -->
 		$cpassword=$_POST['cpassword'];
         $flag = false;
         $active = 0;
-        $count=0;
 		$valid=true;
 		// if((strlen($name)!=4) or ($id[0]!='U') or !ctype_digit($id[1]) or !ctype_digit($id[2]) or !ctype_digit($id[3])){
 		// 		$errors['name']='*InvalnameFormat, Format is UXXX, X is 0-9';
@@ -109,7 +108,7 @@ flag => flag -->
                 //echo '<h6>'.$msg.'<h6>';
                 $hash = md5( rand(0,1000) ); // Generate random 32 character hash and assign it to a local variable.
                 // Example output: f4552671f8909587cf485ea990207f3b
-                $sql="INSERT INTO voter VALUES('$name','$email','$age','$uname','$voter_id','$password','$flag','$count','$hash','$active')";
+                $sql="INSERT INTO voter VALUES('$name','$email','$age','$uname','$voter_id','$password','$flag','$hash','$active')";
                 $res=mysqli_query($conn,$sql);  
                 $message = '
                 
