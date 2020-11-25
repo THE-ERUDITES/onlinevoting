@@ -95,8 +95,8 @@ session_start();
             <?php
                 if(isset($_POST['castvote']))
                 {
-                $email = $_SESSION['email'];
-                $sql="SELECT * FROM voter WHERE email = '$email' ";
+                $voter_id = $_SESSION['voter_id'];
+                $sql="SELECT * FROM voter WHERE voter_id = '$voter_id' ";
                 $result= mysqli_query($conn,$sql);
                 $voter_info=mysqli_fetch_all($result,MYSQLI_ASSOC);
                 $flag= $voter_info[0]['flag'];
