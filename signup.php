@@ -130,7 +130,7 @@ flag => flag -->
                 if($mail->Send()){
                 echo "<script>alert('Email Sent Successfully!');</script>";
                 }
-                else echo "<script>alert('Email Sent Successfully!');</script>";
+                else echo "<script>alert('There has been an error, please try again!');</script>";
             
                 mysqli_close($conn);
         }
