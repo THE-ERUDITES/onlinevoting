@@ -196,11 +196,11 @@ flag => flag -->
 </head>
 <body>
 <div class="container">
-  	<!-- <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+  	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
         <div class="navbar-header">
           <a href="index.html" class="navbar-brand headerFont text-lg"><strong>eVoting</strong></a>
       </div>
-    </nav> -->
+    </nav>
 
     
     <div class="container" style="padding-top:150px;">
