@@ -47,14 +47,24 @@ flag => flag -->
 			$errors['voter_id']='*voter id is not valid';
 			$valid=false;
         }
+        else{
+            $sql="SELECT * FROM govt_db WHERE voter_id='$voter_id'";
+            $res=mysqli_query($conn,$sql);
+            $voters=mysqli_fetch_all($res,MYSQLI_ASSOC);
+            $email1 = $voters[0]['email'];
+            if($email != $email1)
+            {
+                $errors['email']='*not registered email id';
+                $valid=false;
+            }
+        }
         $sql="SELECT * FROM voter WHERE voter_id='$voter_id'";
 		$res=mysqli_query($conn,$sql);
 		if(mysqli_num_rows($res)>0){
 			$errors['voter_id']='*already exists';
 			$valid=false;
-		}
-
-		
+        }
+        
 			for($i=0;$i<strlen($name);$i++){
 				if(!ctype_alpha($name[$i])){
                     if(!ctype_space($name[$i])){
@@ -233,7 +243,8 @@ flag => flag -->
 
                         <label>Email Id:</label>
                         <input type="email" name="email" class="form-control" value="<?php echo isset($_POST["email"]) ? $_POST["email"] : ''; ?>" required>
-                        <br><br>
+                        <div style="color: red;"><?php echo $errors['email']; ?></div><br><br>
+
 
                         <label>Voter ID:</label>
                         <input type="int" name="voter_id" class="form-control" placeholder="7 digits" value="<?php echo isset($_POST["voter_id"]) ? $_POST["voter_id"] : ''; ?>" pattern="[0-9]{7}" required>
