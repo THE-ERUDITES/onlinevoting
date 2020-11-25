@@ -19,20 +19,29 @@
 	if(isset($_POST['submit'])){
 		$uname=$_POST['uname'];
 		$password=$_POST['password'];
-
-		if($conn){
+        if($conn){
 			$sql="SELECT * FROM voter WHERE uname='$uname' AND password='$password'";
-			$res=mysqli_query($conn,$sql);
+            $res=mysqli_query($conn,$sql);
+            
 			if(mysqli_num_rows($res)>0){
-				$voters=mysqli_fetch_all($res,MYSQLI_ASSOC);
-        $_SESSION['name'] = $voters[0]['name'];
-        $_SESSION['email'] = $voters[0]['email'];
-        $_SESSION['age'] = $voters[0]['age'];
-        $_SESSION['voter_id'] = $voters[0]['voter_id'];
-        $_SESSION['uname'] = $uname;
-				$_SESSION['password']=$password;
-				//setcookie("name",$customers[0]['fname'], time() + 60*60*24,'/');
-				header("location: user_profile.php");
+                $voters=mysqli_fetch_all($res,MYSQLI_ASSOC);
+                $active = $voters[0]['active'];
+                if($active == 1)
+                {
+                    $_SESSION['name'] = $voters[0]['name'];
+                    $_SESSION['email'] = $voters[0]['email'];
+                    $_SESSION['age'] = $voters[0]['age'];
+                    $_SESSION['voter_id'] = $voters[0]['voter_id'];
+                    $_SESSION['uname'] = $uname;
+                    $_SESSION['password']=$password;
+                    //setcookie("name",$customers[0]['fname'], time() + 60*60*24,'/');
+                    header("location: user_profile.php");
+                }
+                else
+                {
+                    echo 'account is not activated';
+                }
+                
 			}
 			else{
 				$error='*Incorrect id/password';

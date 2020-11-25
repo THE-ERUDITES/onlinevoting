@@ -87,73 +87,56 @@ flag => flag -->
         // Return Success - Valid Email
         if($valid)
         {
-
-        $msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
-        //echo '<h6>'.$msg.'<h6>';
-        $hash = md5( rand(0,1000) ); // Generate random 32 character hash and assign it to a local variable.
-        // Example output: f4552671f8909587cf485ea990207f3b
-        $sql="INSERT INTO voter VALUES('$name','$email','$age','$uname','$voter_id','$password','$flag','$count','$hash','$active')";
-        $res=mysqli_query($conn,$sql);  
-        echo 'hi';
-        $message = '
-        
-        Thanks for signing up!
-        Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
-        
-        ------------------------
-        Username: '.$name.'
-        Password: '.$password.'
-        ------------------------
-        
-        Please click this link to activate your account:
-        http://localhost/onlinevoting/verify.php?email='.$email.'&hash='.$hash.'
-        
-        '; // Our message above including the link
-        require_once('../PHPMailer/PHPMailer-5.2-stable/PHPMailerAutoload.php');
-        $from='erudite.onlinevoting@gmail.com';
-        $to=$email;
-        $password='eruditeproject';
-        $sub='Signup | Verification';
-        $body=$message;
-        $mail = new PHPMailer(); 
-        $mail->isSMTP();
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'ssl';
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = '465';
-        $mail->isHTML();
-        $mail->Username = $from;
-        $mail->Password = $password;
-        $mail->Subject = $sub;
-        $mail->Body = $body;
-        $mail->AddAddress($to);
-        if($mail->Send()){
-        echo "<h2>Email sent successfully!</h2>";
-        echo "<script>alert('Subject: $sub \\nBody: $body');</script>";
+            if($conn)
+            {
+                $msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
+                //echo '<h6>'.$msg.'<h6>';
+                $hash = md5( rand(0,1000) ); // Generate random 32 character hash and assign it to a local variable.
+                // Example output: f4552671f8909587cf485ea990207f3b
+                $sql="INSERT INTO voter VALUES('$name','$email','$age','$uname','$voter_id','$password','$flag','$count','$hash','$active')";
+                $res=mysqli_query($conn,$sql);  
+                echo 'hi';
+                $message = '
+                
+                Thanks for signing up!
+                Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+                
+                ------------------------
+                Username: '.$name.'
+                Password: '.$password.'
+                ------------------------
+                
+                Please click this link to activate your account:
+                http://localhost/onlinevoting/verify.php?email='.$email.'&hash='.$hash.'
+                
+                '; // Our message above including the link
+                require_once('../PHPMailer/PHPMailer-5.2-stable/PHPMailerAutoload.php');
+                $from='erudite.onlinevoting@gmail.com';
+                $to=$email;
+                $password='eruditeproject';
+                $sub='Signup | Verification';
+                $body=$message;
+                $mail = new PHPMailer(); 
+                $mail->isSMTP();
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = 'ssl';
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Port = '465';
+                $mail->isHTML();
+                $mail->Username = $from;
+                $mail->Password = $password;
+                $mail->Subject = $sub;
+                $mail->Body = $body;
+                $mail->AddAddress($to);
+                if($mail->Send()){
+                echo "<h2>Email sent successfully!</h2>";
+                echo "<script>alert('Subject: $sub \\nBody: $body');</script>";
+                }
+                else echo "<h2>There was an error, try again!</h2>";
+            
+                mysqli_close($conn);
         }
-        else echo "<h2>There was an error, try again!</h2>";
-          
-        //$to      = $email; // Send email to our user
-        //$subject = 'Signup | Verification'; // Give the email a subject 
-        // $message = '
-        
-        // Thanks for signing up!
-        // Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
-        
-        // ------------------------
-        // Username: '.$name.'
-        // Password: '.$password.'
-        // ------------------------
-        
-        // Please click this link to activate your account:
-        // http://localhost/onlinevoting/verify.php?email='.$email.'&hash='.$hash.'
-        
-        // '; // Our message above including the link
-                            
-       // $headers = 'From:noreply@yourwebsite.com' . "\r\n"; // Set from headers
-        //mail($to, $subject, $message, $headers); // Send our email
-        mysqli_close($conn);
-        }
+    }
         ##################################################################################################################################
 		// if($valid){
 		// 	if($conn){
@@ -241,7 +224,7 @@ flag => flag -->
                         <div style="color: red;"><?php echo $errors['age']; ?></div><br><br>
 
                         <label>Username:</label>
-                        <input type="text" name="uname" class="form-control" value="<?php echo isset($_POST["uname"]) ? $_POST["uname"] : ''; ?>" required>
+                        <input type="text" name="uname" class="form-control" placeholder="only alphabets" value="<?php echo isset($_POST["uname"]) ? $_POST["uname"] : ''; ?>" required>
                         <div style="color: red;"><?php echo $errors['uname']; ?></div><br><br>
 
                         <label>Email Id:</label>
@@ -249,10 +232,10 @@ flag => flag -->
                         <br><br>
 
                         <label>Voter ID:</label>
-                        <input type="int" name="voter_id" class="form-control" value="<?php echo isset($_POST["voter_id"]) ? $_POST["voter_id"] : ''; ?>" pattern="[0-9]{7}" required>
+                        <input type="int" name="voter_id" class="form-control" placeholder="7 digits" value="<?php echo isset($_POST["voter_id"]) ? $_POST["voter_id"] : ''; ?>" pattern="[0-9]{7}" required>
                         <div style="color: red;"><?php echo $errors['voter_id']; ?><br><br></div>   
                         <label>Password:</label>
-                        <input type="password" name="password" class="form-control" placeholder="8-50 characters" required>
+                        <input type="password" name="password" class="form-control" placeholder="8-50 numbers" required>
                         <div style="color: red;"><?php echo $errors['password']; ?></div><br><br>
 
                         <label>Confirm Password:</label>

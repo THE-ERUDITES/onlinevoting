@@ -33,7 +33,7 @@
                 
                 if($match > 0){
                     // We have a match, activate the account
-                    $sql = "UPDATE voters SET active='1' WHERE email='".$email."' AND hash='".$hash."' AND active='0'";
+                    $sql = "UPDATE voter SET active='1' WHERE email='".$email."' AND hash='".$hash."' AND active='0'";
                     $res = mysqli_query($conn,$sql);
 
                     echo '<div class="statusmsg">Your account has been activated, you can now login</div>';
