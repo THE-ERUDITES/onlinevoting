@@ -129,17 +129,7 @@ session_start();
     </div> <!-- end of container -->
 
       <!--nomination list-->
-      <?php /*while($row = mysqli_fetch_assoc($result)) { ?>
-                    
-                    <?php echo $row["cid"]; ?></td>
-                    <td><?php echo $row["cname"]; ?></td>
-                    <td><img src="<?php echo ('images/'.$row["cphoto"]); ?>" alt="img not found!" width="60px" height="60px" >
-                        <a href='cupdatephoto.php?cid=<?php echo $row["cid"]; ?>' class='pull-right photo'><span class="glyphicon glyphicon-edit"></span></a></td>
-                    <td><?php echo $row["party"]; ?></td>
-                    <td><?php echo $row["const"]; ?></td>
-                    <td><?php echo $row["body"]; ?></td>
-                
-      <?php }*/ ?>
+     
     <center>
     <?php while($row = mysqli_fetch_assoc($result)) { ?>
         <div class="container-fluid" style="padding:30px 340px 20px 340px" >
@@ -169,7 +159,6 @@ session_start();
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

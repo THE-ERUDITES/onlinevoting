@@ -101,7 +101,6 @@ flag => flag -->
                 // Example output: f4552671f8909587cf485ea990207f3b
                 $sql="INSERT INTO voter VALUES('$name','$email','$age','$uname','$voter_id','$password','$flag','$count','$hash','$active')";
                 $res=mysqli_query($conn,$sql);  
-                echo 'hi';
                 $message = '
                 
                 Thanks for signing up!
@@ -135,10 +134,9 @@ flag => flag -->
                 $mail->Body = $body;
                 $mail->AddAddress($to);
                 if($mail->Send()){
-                echo "<h2>Email sent successfully!</h2>";
-                echo "<script>alert('Subject: $sub \\nBody: $body');</script>";
+                echo "<script>alert('Email Sent Successfully!');</script>";
                 }
-                else echo "<h2>There was an error, try again!</h2>";
+                else echo "<script>alert('There has been an error, please try again!');</script>";
             
                 mysqli_close($conn);
         }
@@ -202,11 +200,11 @@ flag => flag -->
 </head>
 <body>
 <div class="container">
-  	<!-- <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+  	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
         <div class="navbar-header">
           <a href="index.html" class="navbar-brand headerFont text-lg"><strong>eVoting</strong></a>
       </div>
-    </nav> -->
+    </nav>
 
     
     <div class="container" style="padding-top:150px;">

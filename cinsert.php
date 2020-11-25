@@ -7,6 +7,7 @@ session_start();
     $db_name = 'onlinevoting';
     $conn = mysqli_connect($db_host,$db_username,$db_password,$db_name);
     $error=" ";
+    $flag=1;
 
     if(isset($_POST['insert'])){
         $cid=$_POST['cid'];
@@ -16,7 +17,21 @@ session_start();
         $body=$_POST['body'];
         $filename = $_FILES['cphoto']['name'];
 
+        //candidate id validation-----------------------------
+        $sql_checkid="select * from candidate where cid='$cid'";
+        $result = mysqli_query($conn,$sql_checkid);
+        $cnt=0;
+        while($row = mysqli_fetch_assoc($result)) { 
+          $cnt++;
+        }
         
+        if($cnt>0){
+          $flag=0;
+          $error="ERROR!!!!<br>CANDIDATE ID should be UNIQUE!<br>A candidate with this ID already exists.";
+        }
+        //-----------------------------------------------------------------------------------------------
+        
+        if($flag){
           if($conn){
 
             if(!empty($filename)){
@@ -31,7 +46,7 @@ session_start();
             header('Location:candidates.php');
 
           }
-        
+        }      
         
     }
 
