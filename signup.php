@@ -46,6 +46,12 @@ flag => flag -->
 		if(mysqli_num_rows($res)==0){
 			$errors['voter_id']='*voter id is not valid';
 			$valid=false;
+        }
+        $sql="SELECT * FROM voter WHERE voter_id='$voter_id'";
+		$res=mysqli_query($conn,$sql);
+		if(mysqli_num_rows($res)>0){
+			$errors['voter_id']='*already exists';
+			$valid=false;
 		}
 
 		
