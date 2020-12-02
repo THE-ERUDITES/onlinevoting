@@ -1,9 +1,10 @@
 <?php
 session_start();
-    $db_host = "localhost";
-    $db_user = "root";
-    $db_password = "";
-    $db_name = "onlinevoting";
+include 'config.php';
+    #$db_host = "localhost";
+    #$db_user = "root";
+    #$db_password = "";
+    #$db_name = "onlinevoting";
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
     if (!$conn) {
     die("Connection failed.");
@@ -11,7 +12,7 @@ session_start();
 
     if(isset($_POST['submitVote']))
     {
-      echo "<script>alert('thanks!');</script>";
+        echo "<script>alert('thanks!');</script>";
         $voter_id= $_SESSION["voter_id"];
 
         //value of radio button access

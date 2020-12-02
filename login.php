@@ -1,9 +1,10 @@
 <?php 
-	session_start();
-	$db_host = "localhost";
-    $db_user = "root";
-    $db_password = "";
-    $db_name = "onlinevoting";
+  session_start();
+  include 'config.php';
+	  #$db_host = "localhost";
+    #$db_user = "root";
+    #$db_password = "";
+    #$db_name = "onlinevoting";
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
 
 	$error='';
@@ -34,7 +35,7 @@
                     $_SESSION['voter_id'] = $voters[0]['voter_id'];
                     $_SESSION['uname'] = $uname;
                     $_SESSION['password']=$password;
-                    //setcookie("name",$customers[0]['fname'], time() + 60*60*24,'/');
+                    setcookie("voterName",$voters[0]['name'], time() + 60*60*24,'/');
                     header("location: user_profile.php");
                 }
                 else

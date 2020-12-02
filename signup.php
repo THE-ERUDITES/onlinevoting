@@ -7,11 +7,12 @@ password => password
 flag => flag -->
 
 <?php 
-	session_start();
-	$db_host = "localhost";
-    $db_user = "root";
-    $db_password = "";
-    $db_name = "onlinevoting";
+    session_start();
+    include 'config.php';
+	#$db_host = "localhost";
+    #$db_user = "root";
+    #$db_password = "";
+    #$db_name = "onlinevoting";
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
     if(!$conn)
     {

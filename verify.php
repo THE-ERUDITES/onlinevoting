@@ -2,7 +2,7 @@
   
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>NETTUTS > Sign up</title>
+    <title>Verification</title>
     <link href="css/style.css" type="text/css" rel="stylesheet" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,12 +56,12 @@
             <div id="wrap">
             <!--php code-->
                     <?php
-                    
-                    $db_host = 'localhost';
-                    $db_username = 'root';
-                    $db_password = '';
-                    $db_name = 'onlinevoting';
-                    $conn = mysqli_connect($db_host,$db_username,$db_password,$db_name);
+                    include 'config.php';
+                    #$db_host = 'localhost';
+                    #$db_username = 'root';
+                    #$db_password = '';
+                    #$db_name = 'onlinevoting';
+                    $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
                         if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])){
                             // Verify data
                             $email = $_GET['email']; // Set email variable
