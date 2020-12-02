@@ -1,10 +1,6 @@
 <?php
 session_start();
 include 'config.php';
-    #$db_host = 'localhost';
-    #$db_username = 'root';
-    #$db_password = '';
-    #$db_name = 'onlinevoting';
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
 ?>
 
@@ -71,7 +67,7 @@ include 'config.php';
         </div>
       </div> 
     </nav>
-    <!-- end of container --><br><br><br>
+ <br><br><br>
 
 <?php
  

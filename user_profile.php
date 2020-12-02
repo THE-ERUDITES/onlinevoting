@@ -1,21 +1,10 @@
 <?php
 session_start();
 include 'config.php';
-    #$db_host = 'localhost';
-    #$db_username = 'root';
-    #$db_password = '';
-    #$db_name = 'onlinevoting';
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
-
-
     if(!$conn){
         die("Connection Failed.");
-    }
-    else{
-        echo "Connected Successfully!<br><br>";
-    }
-
-    
+    }    
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +63,7 @@ include 'config.php';
         </div>
         </div>
 
-      </div> <!-- end of container -->
+      </div> 
     </nav>
 
     <div class="container" style="padding:100px;">
@@ -107,8 +96,7 @@ include 'config.php';
                 }
                 else{
                     $nam = $_COOKIE['voterName'];
-                    echo "<script>alert('You have already voted once $nam !');</script>";
-                    #setcookie("voterName","",time()-60*60*24,'/'); 
+                    echo "<script>alert('You have already voted once $nam !');</script>"; 
                 }          
                 }
 
@@ -123,7 +111,7 @@ include 'config.php';
 
 
             <form action="user_profile.php" method="POST">
-            <input type="submit" name="castvote" value="CASTE YOUR VOTE!" class="btn btn-primary">
+            <input type="submit" name="castvote" value="CASTE YOUR VOTE!" class="btn btn-primary"><br><br>
             </form>
             <form action="user_profile.php" method="POST">
             <input type="submit" name="logout" value="LOGOUT" class="btn btn-success">
@@ -138,10 +126,7 @@ include 'config.php';
     </div>
   </div>
 
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

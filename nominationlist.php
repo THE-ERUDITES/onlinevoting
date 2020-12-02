@@ -1,13 +1,7 @@
 <?php
 session_start();
 include 'config.php';
-    #$db_host = 'localhost';
-    #$db_username = 'root';
-    #$db_password = '';
-    #$db_name = 'onlinevoting';
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
-
-
     if(!$conn){
         die("Connection Failed.");
     }
@@ -25,10 +19,8 @@ include 'config.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>CR Voting | Green Syntax</title>
 
-    <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
@@ -72,19 +64,14 @@ include 'config.php';
         text-decoration: none;
       }
 
-      /* visited link */
       a:visited {
           color: #FFFFFF;
           text-decoration: none;
       }
-
-      /* mouse over link */
       a:hover {
           color: #FFFFFF;
           text-decoration: none;
       }
-
-      /* selected link */
       a:active {
           color: #FFFFFF;
           text-decoration: none;
@@ -94,8 +81,6 @@ include 'config.php';
         flex: 1 1 auto;
     }
     .div-cards{
-      
-      /* box-shadow */
       box-shadow: rgba(0,0,0,0.7) 0 0 10px;
       border-collapse: collapse;
     }
@@ -126,9 +111,7 @@ include 'config.php';
 
       </div>
     </nav>
-    </div> <!-- end of container -->
-
-      <!--nomination list-->
+    </div>
      
     <center>
     <?php while($row = mysqli_fetch_assoc($result)) { ?>
@@ -154,10 +137,6 @@ include 'config.php';
     </div>
   </center>
   <?php } ?>
-      
-   
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>

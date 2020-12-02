@@ -1,22 +1,10 @@
 <?php 
   session_start();
   include 'config.php';
-	  #$db_host = "localhost";
-    #$db_user = "root";
-    #$db_password = "";
-    #$db_name = "onlinevoting";
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
 
 	$error='';
-	// if(isset($_COOKIE['logout'])){
-	// 	echo "<h3>Good bye, ".$_COOKIE['logout']." !</h3>";
-	// 	setcookie("name",'', time() - 60*60*24,'/');
-	// 	setcookie("logout",'', time() - 60*60*24,'/');
-	// }
-	// if(isset($_COOKIE['delete'])){
-	// 	echo "<h3>Account deleted!</h3>";
-	// 	setcookie("delete",'', time() - 60*60*24,'/');
-	// }
+	
 	if(isset($_POST['submit'])){
 		$uname=$_POST['uname'];
 		$password=$_POST['password'];
@@ -49,8 +37,6 @@
 			}
 		}
 	}
-
-  
 ?>
 
 <!DOCTYPE html>
@@ -129,8 +115,6 @@
     </div>
 
     </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>

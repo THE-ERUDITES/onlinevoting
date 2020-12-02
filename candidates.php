@@ -1,13 +1,7 @@
 <?php
 session_start();
 include 'config.php';
-    #$db_host = 'localhost';
-    #$db_username = 'root';
-    #$db_password = '';
-    #$db_name = 'onlinevoting';
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
-
-
     if(!$conn){
         die("Connection Failed.");
     }
@@ -15,7 +9,6 @@ include 'config.php';
         echo "Connected Successfully!<br><br>";
     }
 
-    //delete
     if(isset($_POST['delete'])){
 
       $delid =$_POST["cid"]; 
@@ -114,9 +107,6 @@ include 'config.php';
 
       </div> 
     </nav>  
-  <!-- end of container -->
-
- <!--tools-->
  <div class="container" style="padding:50px 30px 5px 30px;">
       <div class="row">
         <div class="col-sm-12">
@@ -125,7 +115,6 @@ include 'config.php';
         </div>
       </div>
     
-    <!--candidate list -->
     <center>
     <div class="container" style="padding:15px 10px 20px 10px ;">
       <div class="row">
@@ -134,7 +123,6 @@ include 'config.php';
           <div class="page-header">
             <h2 class="specialHead" ></span>CANDIDATE LIST</h2><br>
             
-            <!--table-->
             <table style = "width:90%;border-collapse: collapse;" border="3px">
                 <tr>
                 <center>

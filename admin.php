@@ -1,10 +1,6 @@
 <?php  
 session_start();
 include 'config.php';
-  #$db_host = 'localhost';
-  #$db_username = 'root';
-  #$db_password = '';
-  #$db_name = 'onlinevoting';
   $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
     $error="";
 
@@ -48,10 +44,7 @@ include 'config.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Admin Panel</title>
-
-    <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
@@ -80,11 +73,6 @@ include 'config.php';
       }
     </style>
   </head>
-
-  <!--PHP-->
-  <?php
-  
-  ?>
 
   <body>
 	
@@ -129,10 +117,7 @@ include 'config.php';
     		<div class="col-sm-4"></div>
     	</div>
     </div>
-
-    </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>

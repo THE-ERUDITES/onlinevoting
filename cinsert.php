@@ -1,10 +1,6 @@
 <?php
 session_start();
 include 'config.php';
-    #$db_host = 'localhost';
-    #$db_username = 'root';
-    #$db_password = '';
-    #$db_name = 'onlinevoting';
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
     $error=" ";
     $flag=1;
@@ -16,8 +12,6 @@ include 'config.php';
         $const=$_POST['const'];
         $body=$_POST['body'];
         $filename = $_FILES['cphoto']['name'];
-
-        //candidate id validation-----------------------------
         $sql_checkid="select * from candidate where cid='$cid'";
         $result = mysqli_query($conn,$sql_checkid);
         $cnt=0;
@@ -29,7 +23,6 @@ include 'config.php';
           $flag=0;
           $error="ERROR!!!!<br>CANDIDATE ID should be UNIQUE!<br>A candidate with this ID already exists.";
         }
-        //-----------------------------------------------------------------------------------------------
         
         if($flag){
           if($conn){
@@ -131,9 +124,6 @@ include 'config.php';
 
       </div> 
     </nav>  
-  <!-- end of container -->
-
-    <!--candidate list -->
     <div class="container" style="padding:100px 30px 20px 30px ;">
       <div class="row">
         <div class="col-sm-12" style="border:2px solid gray; padding:15px 300px 15px 300px">
@@ -144,7 +134,6 @@ include 'config.php';
             <form action="cinsert.php" method="POST" enctype="multipart/form-data">
       			<div class="form-group">
             
-            <!--error message if any-->
             <h5 style="color: red;"><?php echo $error; ?></h5><br>
 
                     <label>Candidate ID *</label><br>
@@ -162,7 +151,6 @@ include 'config.php';
                     <label>Description</label><br>
                     <input type="text" name="body" placeholder="Enter few lines of Description" class="form-control"><br>
                       
-                    <!--upload photo-->
                     <label>Select image to upload:</label><br> <input type="file" name="cphoto" id="fileToUpload"><br><br>
                       
 
@@ -178,10 +166,7 @@ include 'config.php';
   </div>
   </center>
 
-    <!--tools-->
-    <!--tools-->
     <div class="container" style="padding:20px 30px 30px 30px;">
-            <!--display button--> 
             <center>
             <button type="button" name="display" class="btn btn-info"><a href="candidates.php"><span class="glyphicon glyphicon-step-backward"></span>DISPLAY LIST</button>
           </center>

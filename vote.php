@@ -1,10 +1,6 @@
 <?php
 session_start();
 include 'config.php';
-    #$db_host = "localhost";
-    #$db_user = "root";
-    #$db_password = "";
-    #$db_name = "onlinevoting";
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
     if (!$conn) {
     die("Connection failed.");
@@ -15,14 +11,10 @@ include 'config.php';
         echo "<script>alert('thanks!');</script>";
         $voter_id= $_SESSION["voter_id"];
 
-        //value of radio button access
         $radioVal_cid = $_POST['VoteRadio'];
-        //echo $radioVal_cid;
         
-        //voting allowed donly once
         $sql1= "UPDATE voter SET flag=1 WHERE voter_id='$voter_id' ";
 
-        //increase count
         $sql2= "UPDATE candidate SET count_vote=count_vote+1 WHERE cid='$radioVal_cid' ";
         if (mysqli_query($conn, $sql1) && mysqli_query($conn,$sql2)) {
             
@@ -108,9 +100,7 @@ include 'config.php';
         </div>
       </div> 
     </nav>  
-  <!-- end of container -->
-    
-    <!--candidate list -->
+
     <center>
     <div class="container" style="padding:100px 10px 20px 10px ;">
       <div class="row">
@@ -119,7 +109,6 @@ include 'config.php';
           <div class="page-header">
             <h2 class="specialHead" ></span>CAST YOUR VOTE WISELY, <?php echo $_SESSION["name"];?>!</h2><br>
             
-            <!--table-->
             <form method="POST" action="vote.php">
             <table style = "width:75%;border-collapse: collapse;" border="1px">
                 <tr>

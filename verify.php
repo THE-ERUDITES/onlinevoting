@@ -44,8 +44,6 @@
     
     <center>
 
-           
-    <!--UI-->
     <div class="container" style="padding:100px;">
       <div class="row">
         <div class="col-sm-12" style="border:2px solid gray;">
@@ -54,35 +52,27 @@
             <h2 class="specialHead">ACCOUNT VERIFICATION</h2><br>
             <img src="images/verified.png" alt="admin" width="150px" height="150px"><br><br>
             <div id="wrap">
-            <!--php code-->
                     <?php
                     include 'config.php';
-                    #$db_host = 'localhost';
-                    #$db_username = 'root';
-                    #$db_password = '';
-                    #$db_name = 'onlinevoting';
                     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
                         if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])){
-                            // Verify data
-                            $email = $_GET['email']; // Set email variable
-                            $hash = $_GET['hash']; // Set hash variable
+                            $email = $_GET['email']; 
+                            $hash = $_GET['hash']; 
                             $sql = "SELECT email, hash, active FROM voter WHERE email='".$email."' AND hash='".$hash."' AND active='0'";
                             $res = mysqli_query($conn,$sql);
                             $match  = mysqli_num_rows($res);  
-                            echo $email; // Display how many matches have been found -> remove this when done with testing ;)
+                            echo $email; 
                             
                             if($match > 0){
-                                // We have a match, activate the account
+                              
                                 $sql = "UPDATE voter SET active='1' WHERE email='".$email."' AND hash='".$hash."' AND active='0'";
                                 $res = mysqli_query($conn,$sql);
 
                                 echo '<div class="statusmsg normalFont">Your account has been activated, you can now Login to caste your vote! <br> Thankyou for Registering!</div>';
                             }else{
-                                // No match -> invalid url or account has already been activated.
                                 echo '<div class="statusmsg normalFont">The URL is either invalid or you already have activated your account.</div>';
                             }
                         }else{
-                            // Invalid approach
                             echo '<div class="statusmsg normalFont">Invalid approach, please use the link that has been send to your email.</div>';
                         }   
                         

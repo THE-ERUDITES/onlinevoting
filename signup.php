@@ -1,18 +1,6 @@
-<!-- fullname => name
-email id=> email
-age  => age
-username => uname 
-voter id=> voter_id
-password => password
-flag => flag -->
-
 <?php 
     session_start();
     include 'config.php';
-	#$db_host = "localhost";
-    #$db_user = "root";
-    #$db_password = "";
-    #$db_name = "onlinevoting";
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
     if(!$conn)
     {
@@ -31,10 +19,6 @@ flag => flag -->
         $flag = false;
         $active = 0;
 		$valid=true;
-		// if((strlen($name)!=4) or ($id[0]!='U') or !ctype_digit($id[1]) or !ctype_digit($id[2]) or !ctype_digit($id[3])){
-		// 		$errors['name']='*InvalnameFormat, Format is UXXX, X is 0-9';
-		// 		$valid=false;
-		// }
 		$sql="SELECT * FROM voter WHERE uname='$uname'";
 		$res=mysqli_query($conn,$sql);
 		if(mysqli_num_rows($res)>0){
@@ -99,14 +83,11 @@ flag => flag -->
 			$errors['cpassword']='*Passwords not matching';
 			$valid=false;
 		}
-        #################################################################################################################################
-        // Return Success - Valid Email
         if($valid)
         {
             if($conn)
             {
                 $msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
-                //echo '<h6>'.$msg.'<h6>';
                 $hash = md5( rand(0,1000) ); // Generate random 32 character hash and assign it to a local variable.
                 // Example output: f4552671f8909587cf485ea990207f3b
                 $sql="INSERT INTO voter VALUES('$name','$email','$age','$uname','$voter_id','$password','$flag','$hash','$active')";
@@ -115,16 +96,13 @@ flag => flag -->
                 
                 Thanks for signing up!
                 Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
-                
-                ------------------------
+
                 Username: '.$name.'
-                Password: '.$password.'
-                ------------------------
                 
                 Please click this link to activate your account:
                 http://localhost/onlinevoting/verify.php?email='.$email.'&hash='.$hash.'
                 
-                '; // Our message above including the link
+                ';
                 require_once('../PHPMailer/PHPMailer-5.2-stable/PHPMailerAutoload.php');
                 $from='erudite.onlinevoting@gmail.com';
                 $to=$email;
@@ -176,7 +154,6 @@ flag => flag -->
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -270,8 +247,6 @@ flag => flag -->
     </div>
 
     </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 

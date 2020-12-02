@@ -1,10 +1,6 @@
 <?php
 session_start();
 include 'config.php';
-    #$db_host = 'localhost';
-    #$db_username = 'root';
-    #$db_password = '';
-    #$db_name = 'onlinevoting';
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
 
     if(!$conn){
@@ -86,9 +82,7 @@ include 'config.php';
 
       </div> 
     </nav>  
-  <!-- end of container -->
 
-    <!--candidate list -->
     <div class="container" style="padding:100px 30px 20px 30px ;">
       <div class="row">
         <div class="col-sm-12" style="border:2px solid gray;">
@@ -96,7 +90,6 @@ include 'config.php';
           <div class="page-header">
             <h2 class="specialHead" ></span>CANDIDATE LIST</h2><br>
             
-            <!--table-->
             <table style = "width:90%;border-collapse: collapse;" border="3px">
                 <tr>
                 <th>candidate ID</th>
@@ -134,10 +127,7 @@ include 'config.php';
   </div>
   </center>
 
-    <!--tools-->
-    <!--tools-->
     <div class="container" style="padding:20px 30px 30px 30px;">
-            <!--display button--> 
             <center>
             <button type="button" name="display" class="btn btn-info"><a href="candidates.php"><span class="glyphicon glyphicon-step-backward"></span>DISPLAY LIST</button>
           </center>

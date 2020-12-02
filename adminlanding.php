@@ -67,7 +67,7 @@ session_start();
           <span class="normalFont"><a href="index.html" class="btn btn-success navbar-right navbar-btn"><strong>Sign Out</strong></a></span></button>
         </div>
 
-      </div> <!-- end of container -->
+      </div>
     </nav>
 
     <div class="container" style="padding:100px;">
@@ -90,10 +90,7 @@ session_start();
     </div>
   </div>
 
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

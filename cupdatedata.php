@@ -1,10 +1,6 @@
 <?php
 session_start();
 include 'config.php';
-    #$db_host = 'localhost';
-    #$db_username = 'root';
-    #$db_password = '';
-    #$db_name = 'onlinevoting';
     $conn = mysqli_connect($db_host,$db_user,$db_password,$db_name);
     $error=" ";
 
@@ -100,9 +96,6 @@ include 'config.php';
 
       </div> 
     </nav>  
-  <!-- end of container -->
-
-    <!--candidate fetch info of particular id to be updated -->
     <?php
 
      $id=$_GET["cid"]; 
@@ -160,10 +153,8 @@ include 'config.php';
     </div>
   </div>
   </center>
-
-    <!--tools-->
     <div class="container" style="padding:20px 30px 30px 30px;">
-            <!--display button--> 
+           
             <center>
             <button type="button" name="display" class="btn btn-info"><a href="cupdate.php"><span class="glyphicon glyphicon-step-backward"></span>UPDATE LIST</button>
           </center>
