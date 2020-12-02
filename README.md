@@ -1,2 +1,4 @@
 # onlinevoting
-ONLINE VOTING SYSTEM
+<br><br><b>ONLINE VOTING SYSTEM<b>
+  <hr>
+  
