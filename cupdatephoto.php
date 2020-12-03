@@ -128,7 +128,7 @@ include 'config.php';
 
     <div class="container" style="padding:20px 30px 30px 30px;">
             <center>
-            <button type="button" name="display" class="btn btn-info"><a href="cupdate.php"><span class="glyphicon glyphicon-step-backward"></span>UPDATE LIST</button>
+            <button type="button" name="display" class="btn btn-info"><a href="candidates.php"><span class="glyphicon glyphicon-step-backward"></span>DISPLAY LIST</button>
           </center>
     </div>
       

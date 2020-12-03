@@ -106,10 +106,10 @@ include 'config.php';
         if(mysqli_num_rows($res)>0)
         {
             $cand=mysqli_fetch_all($res,MYSQLI_ASSOC);
-            $_SESSION["cname"]=$cand[0]['cname']; 
-            $_SESSION["party"]=$cand[0]['party']; 
-            $_SESSION["const"]=$cand[0]['const']; 
-            $_SESSION["body"]=$cand[0]['body']; 
+            $cname=$cand[0]['cname']; 
+            $party=$cand[0]['party']; 
+            $const=$cand[0]['const']; 
+            $body=$cand[0]['body']; 
         }
     }
      ?>
@@ -128,16 +128,16 @@ include 'config.php';
       				<input type="text" name="cid" value="<?php echo $id;  ?>"  placeholder="Enter Candidate ID eg.456" pattern="[0-9]{3}" class="form-control" required><br>
                       
                     <label>Candidate Full Name *</label><br>
-      				<input type="text" name="cname" value="<?php echo $_SESSION["cname"]; ?>" placeholder="Enter Full Name" class="form-control" required><br>
+      				<input type="text" name="cname" value="<?php echo $cname; ?>" placeholder="Enter Full Name" class="form-control" required><br>
 
                     <label>Political Party he/she belongs to *</label><br>
-                      <input type="text" name="party" value="<?php echo $_SESSION["party"]; ?>" placeholder="Enter Political Party" class="form-control" required><br>
+                      <input type="text" name="party" value="<?php echo $party; ?>" placeholder="Enter Political Party" class="form-control" required><br>
                     
                     <label>Constituency of the Candidate *</label><br>
-      				<input type="text" name="const" value="<?php echo $_SESSION["const"]; ?>" placeholder="Enter Constituency" class="form-control" required><br>
+      				<input type="text" name="const" value="<?php echo $const; ?>" placeholder="Enter Constituency" class="form-control" required><br>
                       
                     <label>Description</label><br>
-                    <input type="text" name="body" value="<?php echo $_SESSION["body"]; ?>" placeholder="Enter few lines of Description" class="form-control"><br>
+                    <input type="text" name="body" value="<?php echo $body; ?>" placeholder="Enter few lines of Description" class="form-control"><br>
                       
 
                       <h5 style="color: red;"><?php echo $error; ?></h5><br>
@@ -156,7 +156,7 @@ include 'config.php';
     <div class="container" style="padding:20px 30px 30px 30px;">
            
             <center>
-            <button type="button" name="display" class="btn btn-info"><a href="cupdate.php"><span class="glyphicon glyphicon-step-backward"></span>UPDATE LIST</button>
+            <button type="button" name="display" class="btn btn-info"><a href="candidates.php"><span class="glyphicon glyphicon-step-backward"></span>DISPLAY LIST</button>
           </center>
     </div>
       
