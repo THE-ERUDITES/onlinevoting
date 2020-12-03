@@ -75,7 +75,7 @@
 
 		if(strlen($password)<8&&strlen($password)>50){
             
-			$errors['password']='*Length must be greater than 8 and less than 50';
+			$errors['password']='*Length must be greater than 7 and less than 50';
 			$valid=false;
 		}
 
